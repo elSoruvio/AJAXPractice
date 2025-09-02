@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to detail your site's privacy policy.</p>
+
+<button id="btn1">Click Me!</button>
+<div id="div1"></div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () { //runs JS code as soon as the DOM becomes available to manipulate
+            $("#btn1").on('click', function () { //AJAX event + function
+                $.ajax({ //assynchronous AJAX request ({request data})
+                    url: '/Home/MyJson',
+                    type: 'GET',
+                    success: function (data) {
+                        console.log("Response:", data);
+                        $("#div1").html(data.myProperty); 
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error:", error);
+                    }
+                });
+            });
+        });
+    </script>
+}
